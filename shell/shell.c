@@ -90,6 +90,13 @@ const struct centry commandtab[] = {
     {"xweb", FALSE, xsh_xweb},
 #endif
     {"?", FALSE, xsh_help}
+    
+    ,
+    // OS2 Defined
+    {"printtos", FALSE, xsh_printtos},
+    {"printprocstks", FALSE, xsh_printprocstks},
+    {"lights", FALSE, xsh_lights},
+    {"flashtest", FALSE, xsh_flashtest}
 };
 
 const ulong ncommand = sizeof(commandtab) / sizeof(struct centry);

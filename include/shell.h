@@ -94,4 +94,9 @@ shellcmd xsh_vlanstat(int, char *[]);
 shellcmd xsh_voip(int, char *[]);
 shellcmd xsh_xweb(int, char *[]);
 
+// OS2 Defined
+shellcmd xsh_printtos(int, char *[]);
+shellcmd xsh_printprocstks(int, char *[]);
+shellcmd xsh_lights(int, char *[]);
+shellcmd xsh_flashtest(int, char *[]);
 #endif                          /* _SHELL_H_ */

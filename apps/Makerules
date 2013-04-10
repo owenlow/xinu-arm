@@ -3,8 +3,8 @@
 # Name of this component (the directory this file is stored in)
 COMP = apps
 
-# Source files for this component
-C_FILES = date.c rdate.c
+# Source files for this component 
+C_FILES = date.c rdate.c printtos.c printprocstks.c lights.c
 
 S_FILES =
 
