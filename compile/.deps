@@ -1,0 +1,1083 @@
+start.o: ../loader/platforms/raspberry-pi/start.S \
+ ../system/platforms/raspberry-pi/platform-local.h \
+ ../device/interrupt-controller/pl190.h
+ctxsw.o: ../system/platforms/raspberry-pi/ctxsw.S
+pause.o: ../system/platforms/raspberry-pi/pause.S
+halt.o: ../system/platforms/raspberry-pi/halt.S
+clkupdate.o: ../system/platforms/raspberry-pi/clkupdate.c \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/stddef.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/vic.h ../include/conf.h
+create.o: ../system/platforms/raspberry-pi/create.c ../include/debug.h \
+ ../include/stddef.h ../include/memory.h ../include/stdarg.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/string.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h
+handlers.o: ../system/platforms/raspberry-pi/handlers.c
+interrupt.o: ../system/platforms/raspberry-pi/interrupt.c \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/vic.h
+platforminit.o: ../system/platforms/raspberry-pi/platforminit.c \
+ ../include/kernel.h ../include/conf.h ../include/stddef.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/uart.h ../include/device.h ../include/semaphore.h \
+ ../include/queue.h ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/memory.h ../include/string.h \
+ ../system/platforms/raspberry-pi/vic.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/gpio.h
+stubs.o: ../system/platforms/raspberry-pi/stubs.c \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/conf.h \
+ ../include/stddef.h ../include/device.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/uart.h
+vic.o: ../system/platforms/raspberry-pi/vic.c \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/vic.h
+mailbox.o: ../system/platforms/raspberry-pi/mailbox.c \
+ ../system/platforms/raspberry-pi/mbox.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/mailbox.h
+mbox.o: ../system/platforms/raspberry-pi/mbox.c \
+ ../system/platforms/raspberry-pi/mbox.h \
+ ../system/platforms/raspberry-pi/stdint.h
+initialize.o: ../system/initialize.c ../include/kernel.h \
+ ../include/conf.h ../include/stddef.h ../include/backplane.h \
+ ../include/device.h ../include/sbconfig.h ../include/clock.h \
+ ../include/queue.h ../include/gpio.h ../include/memory.h \
+ ../include/bufpool.h ../include/semaphore.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/tlb.h ../include/mailbox.h ../include/network.h \
+ ../include/ethernet.h ../include/string.h ../include/nvram.h \
+ ../include/flash.h ../include/stdarg.h ../include/stdio.h \
+ ../include/syscall.h ../include/safemem.h ../include/uart.h
+queue.o: ../system/queue.c ../include/stddef.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+kill.o: ../system/kill.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/safemem.h
+ready.o: ../system/ready.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+resched.o: ../system/resched.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/clock.h
+resume.o: ../system/resume.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+suspend.o: ../system/suspend.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+chprio.o: ../system/chprio.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+getprio.o: ../system/getprio.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+queue.o: ../system/queue.c ../include/stddef.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+getitem.o: ../system/getitem.c ../include/stddef.h ../include/queue.h \
+ ../include/kernel.h ../include/conf.h
+queinit.o: ../system/queinit.c ../include/queue.h ../include/kernel.h \
+ ../include/conf.h ../include/stddef.h
+insert.o: ../system/insert.c ../include/stddef.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+gettid.o: ../system/gettid.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+xdone.o: ../system/xdone.c ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/gpio.h
+yield.o: ../system/yield.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+userret.o: ../system/userret.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+clkinit.o: ../system/clkinit.c ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/clock.h \
+ ../include/queue.h
+clkhandler.o: ../system/clkhandler.c ../include/stddef.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/clock.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../system/platforms/raspberry-pi/gpio.h
+insertd.o: ../system/insertd.c ../include/stddef.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+sleep.o: ../system/sleep.c ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/thread.h \
+ ../include/semaphore.h ../include/queue.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/clock.h
+unsleep.o: ../system/unsleep.c ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/thread.h \
+ ../include/semaphore.h ../include/queue.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/clock.h
+wakeup.o: ../system/wakeup.c ../include/stddef.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/clock.h
+semcreate.o: ../system/semcreate.c ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+semfree.o: ../system/semfree.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+semcount.o: ../system/semcount.c ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h
+signal.o: ../system/signal.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+signaln.o: ../system/signaln.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+wait.o: ../system/wait.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+memget.o: ../system/memget.c ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/memory.h \
+ ../include/stddef.h
+memfree.o: ../system/memfree.c ../include/platform.h ../include/stddef.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+stkget.o: ../system/stkget.c ../include/stddef.h ../include/memory.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h
+bfpalloc.o: ../system/bfpalloc.c ../include/stddef.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/memory.h \
+ ../include/bufpool.h ../include/semaphore.h ../include/queue.h \
+ ../include/kernel.h ../include/conf.h
+bfpfree.o: ../system/bfpfree.c ../include/stddef.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/memory.h \
+ ../include/bufpool.h ../include/semaphore.h ../include/queue.h \
+ ../include/kernel.h ../include/conf.h
+bufget.o: ../system/bufget.c ../include/stddef.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/bufpool.h
+buffree.o: ../system/buffree.c ../include/stddef.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/bufpool.h
+send.o: ../system/send.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+receive.o: ../system/receive.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+recvclr.o: ../system/recvclr.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+recvtime.o: ../system/recvtime.c ../include/conf.h ../include/stddef.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/clock.h
+close.o: ../system/close.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h
+control.o: ../system/control.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h
+getc.o: ../system/getc.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h
+open.o: ../system/open.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h ../include/stdarg.h
+ioerr.o: ../system/ioerr.c ../include/stddef.h
+ionull.o: ../system/ionull.c ../include/stddef.h
+read.o: ../system/read.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h
+putc.o: ../system/putc.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h
+seek.o: ../system/seek.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h
+write.o: ../system/write.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h
+getdev.o: ../system/getdev.c ../include/stddef.h ../include/device.h \
+ ../include/conf.h ../include/string.h
+debug.o: ../system/debug.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+tar.o: ../system/tar.c ../include/tar.h ../include/stddef.h \
+ ../include/string.h
+loopbackGetc.o: ../device/loopback/loopbackGetc.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/loopback.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h
+loopbackClose.o: ../device/loopback/loopbackClose.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/loopback.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/stdlib.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+loopbackOpen.o: ../device/loopback/loopbackOpen.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/loopback.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/stdlib.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+loopbackPutc.o: ../device/loopback/loopbackPutc.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/loopback.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+loopbackWrite.o: ../device/loopback/loopbackWrite.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/loopback.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h
+loopbackRead.o: ../device/loopback/loopbackRead.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/loopback.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h
+loopbackControl.o: ../device/loopback/loopbackControl.c \
+ ../include/stddef.h ../include/device.h ../include/conf.h \
+ ../include/loopback.h ../include/semaphore.h ../include/queue.h \
+ ../include/kernel.h
+loopbackInit.o: ../device/loopback/loopbackInit.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/loopback.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/stdlib.h
+uartInit.o: ../device/uart-pl011/uartInit.c ../include/uart.h \
+ ../include/device.h ../include/conf.h ../include/stddef.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../device/uart-pl011/pl011.h ../system/platforms/raspberry-pi/stdint.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h ../include/stdlib.h
+uartInterrupt.o: ../device/uart-pl011/uartInterrupt.c ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/device.h ../include/uart.h ../device/uart-pl011/pl011.h
+uartPutc.o: ../device/uart-pl011/uartPutc.c ../include/stddef.h \
+ ../include/uart.h ../include/device.h ../include/conf.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h
+uartRead.o: ../device/uart-pl011/uartRead.c ../include/stddef.h \
+ ../include/uart.h ../include/device.h ../include/conf.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+uartWrite.o: ../device/uart-pl011/uartWrite.c ../include/stddef.h \
+ ../include/uart.h ../include/device.h ../include/conf.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../device/uart-pl011/pl011.h ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h
+uartGetc.o: ../device/uart-pl011/uartGetc.c ../include/stddef.h \
+ ../include/uart.h ../include/device.h ../include/conf.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h
+uartControl.o: ../device/uart-pl011/uartControl.c ../include/stddef.h \
+ ../include/uart.h ../include/device.h ../include/conf.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h
+uartStat.o: ../device/uart-pl011/uartStat.c ../include/stddef.h \
+ ../include/uart.h ../include/device.h ../include/conf.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../device/uart-pl011/pl011.h ../system/platforms/raspberry-pi/stdint.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/string.h ../include/stdlib.h
+kprintf.o: ../device/uart-pl011/kprintf.c ../include/stddef.h \
+ ../include/stdarg.h ../include/device.h ../include/conf.h \
+ ../include/stdio.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/uart.h ../device/uart-pl011/pl011.h
+ttyControl.o: ../device/tty/ttyControl.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h
+ttyOpen.o: ../device/tty/ttyOpen.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+ttyRead.o: ../device/tty/ttyRead.c ../include/stddef.h ../include/ctype.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h
+ttyClose.o: ../device/tty/ttyClose.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h ../include/stdlib.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h
+ttyGetc.o: ../device/tty/ttyGetc.c ../include/stddef.h ../include/ctype.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h
+ttyInit.o: ../device/tty/ttyInit.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h ../include/stdlib.h
+ttyPutc.o: ../device/tty/ttyPutc.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h
+ttyWrite.o: ../device/tty/ttyWrite.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/tty.h \
+ ../include/stdarg.h
+date.o: ../apps/date.c ../include/clock.h ../include/queue.h \
+ ../include/kernel.h ../include/conf.h ../include/stddef.h \
+ ../include/date.h ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+rdate.o: ../apps/rdate.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/device.h ../include/udp.h ../include/network.h \
+ ../include/ethernet.h ../include/string.h ../include/ipv4.h \
+ ../include/date.h ../include/stdlib.h ../include/shell.h \
+ ../include/ether.h ../include/vlan.h
+printtos.o: ../apps/printtos.c ../include/printtos.h ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+printprocstks.o: ../apps/printprocstks.c ../include/printprocstks.h \
+ ../include/stddef.h ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/printtos.h
+lights.o: ../apps/lights.c ../include/lights.h ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../apps/../system/platforms/raspberry-pi/gpio.h \
+ ../apps/../system/platforms/raspberry-pi/bcm2835.h
+display.o: ../apps/display.c ../include/display.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../apps/../system/platforms/raspberry-pi/mailbox.h \
+ ../apps/../system/platforms/raspberry-pi/mbox.h
+mailboxAlloc.o: ../mailbox/mailboxAlloc.c ../include/stddef.h \
+ ../include/mailbox.h ../include/semaphore.h ../include/queue.h \
+ ../include/kernel.h ../include/conf.h ../include/memory.h
+mailboxCount.o: ../mailbox/mailboxCount.c ../include/stddef.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/mailbox.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/conf.h
+mailboxFree.o: ../mailbox/mailboxFree.c ../include/stddef.h \
+ ../include/mailbox.h ../include/semaphore.h ../include/queue.h \
+ ../include/kernel.h ../include/conf.h ../include/memory.h
+mailboxInit.o: ../mailbox/mailboxInit.c ../include/stddef.h \
+ ../include/mailbox.h ../include/semaphore.h ../include/queue.h \
+ ../include/kernel.h ../include/conf.h
+mailboxReceive.o: ../mailbox/mailboxReceive.c ../include/stddef.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/mailbox.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/conf.h
+mailboxSend.o: ../mailbox/mailboxSend.c ../include/stddef.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/mailbox.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/conf.h
+shell.o: ../shell/shell.c ../include/stddef.h ../include/ctype.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/shell.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/conf.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/stdlib.h ../include/tty.h \
+ ../include/device.h ../include/nvram.h ../include/flash.h
+lexan.o: ../shell/lexan.c ../include/stddef.h ../include/shell.h
+xsh_clear.o: ../shell/xsh_clear.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_date.o: ../shell/xsh_date.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/date.h
+xsh_exit.o: ../shell/xsh_exit.c ../include/stddef.h ../include/shell.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_help.o: ../shell/xsh_help.c ../include/stddef.h ../include/shell.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_reset.o: ../shell/xsh_reset.c ../include/stddef.h ../include/gpio.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_sleep.o: ../shell/xsh_sleep.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/stdlib.h
+xsh_kill.o: ../shell/xsh_kill.c ../include/stddef.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/stdio.h ../include/stdarg.h ../include/string.h \
+ ../include/stdlib.h
+xsh_ps.o: ../shell/xsh_ps.c ../include/stddef.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/stdio.h ../include/stdarg.h ../include/string.h
+xsh_memdump.o: ../shell/xsh_memdump.c ../include/stddef.h \
+ ../include/string.h ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/ctype.h
+xsh_memstat.o: ../shell/xsh_memstat.c ../include/stddef.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/safemem.h ../include/conf.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/debug.h \
+ ../include/string.h ../include/stdlib.h
+xsh_dumptlb.o: ../shell/xsh_dumptlb.c ../include/stddef.h \
+ ../include/kernel.h ../include/conf.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/tlb.h
+xsh_user.o: ../shell/xsh_user.c ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/stdlib.h ../include/syscall.h ../include/mailbox.h
+xsh_uartstat.o: ../shell/xsh_uartstat.c ../include/stddef.h \
+ ../include/uart.h ../include/device.h ../include/conf.h \
+ ../include/semaphore.h ../include/queue.h ../include/kernel.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/string.h ../include/stdlib.h
+xsh_gpiostat.o: ../shell/xsh_gpiostat.c ../include/stddef.h \
+ ../include/gpio.h ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_led.o: ../shell/xsh_led.c ../include/stddef.h ../include/gpio.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_arp.o: ../shell/xsh_arp.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/network.h ../include/ethernet.h \
+ ../include/arp.h ../include/mailbox.h
+xsh_ethstat.o: ../shell/xsh_ethstat.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h ../include/ether.h \
+ ../include/ethernet.h ../include/stdarg.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/vlan.h \
+ ../include/stdio.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/string.h ../include/stdlib.h
+xsh_nc.o: ../shell/xsh_nc.c ../include/ctype.h ../include/device.h \
+ ../include/conf.h ../include/stddef.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/ipv4.h \
+ ../include/network.h ../include/ethernet.h ../include/string.h \
+ ../include/shell.h ../include/stdlib.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/tcp.h ../include/udp.h
+xsh_netdown.o: ../shell/xsh_netdown.c ../include/stddef.h \
+ ../include/device.h ../include/conf.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/ipv4.h \
+ ../include/network.h ../include/ethernet.h ../include/string.h \
+ ../include/shell.h ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../include/semaphore.h ../include/queue.h \
+ ../include/kernel.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+xsh_netemu.o: ../shell/xsh_netemu.c ../include/stddef.h \
+ ../include/stdlib.h ../include/date.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h
+xsh_netstat.o: ../shell/xsh_netstat.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/network.h ../include/ethernet.h
+xsh_netup.o: ../shell/xsh_netup.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/stdlib.h ../include/device.h ../include/ether.h \
+ ../include/ethernet.h ../include/vlan.h ../include/ipv4.h \
+ ../include/network.h ../include/string.h ../include/shell.h \
+ ../include/nvram.h ../include/flash.h
+xsh_ping.o: ../shell/xsh_ping.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/stdlib.h ../include/string.h ../include/network.h \
+ ../include/ethernet.h ../include/ipv4.h ../include/icmp.h \
+ ../include/mailbox.h ../include/route.h ../include/clock.h \
+ ../include/shell.h
+xsh_rdate.o: ../shell/xsh_rdate.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/date.h ../include/ipv4.h \
+ ../include/network.h ../include/ethernet.h
+xsh_route.o: ../shell/xsh_route.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/ipv4.h ../include/network.h \
+ ../include/ethernet.h ../include/route.h ../include/mailbox.h
+xsh_snoop.o: ../shell/xsh_snoop.c ../include/stddef.h ../include/conf.h \
+ ../include/ipv4.h ../include/network.h ../include/ethernet.h \
+ ../include/string.h ../include/shell.h ../include/snoop.h \
+ ../include/arp.h ../include/mailbox.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/tcp.h \
+ ../include/stdarg.h ../include/stdio.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/udp.h ../include/stdlib.h
+xsh_tcpstat.o: ../shell/xsh_tcpstat.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/network.h ../include/ethernet.h \
+ ../include/tcp.h ../include/ipv4.h
+xsh_telnet.o: ../shell/xsh_telnet.c \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/shell.h \
+ ../include/stddef.h ../include/stdlib.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/ipv4.h ../include/network.h \
+ ../include/ethernet.h ../include/tcp.h ../include/telnet.h \
+ ../include/device.h ../include/tty.h ../include/ether.h \
+ ../include/vlan.h
+xsh_telnetserver.o: ../shell/xsh_telnetserver.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/stdlib.h ../include/string.h ../include/shell.h \
+ ../include/device.h ../include/telnet.h ../include/network.h \
+ ../include/ethernet.h ../include/ipv4.h ../include/ether.h \
+ ../include/vlan.h
+xsh_udpstat.o: ../shell/xsh_udpstat.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/network.h ../include/ethernet.h \
+ ../include/udp.h ../include/ipv4.h
+xsh_vlanstat.o: ../shell/xsh_vlanstat.c ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_voip.o: ../shell/xsh_voip.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/device.h ../include/udp.h \
+ ../include/network.h ../include/ethernet.h ../include/ipv4.h \
+ ../include/stdlib.h ../include/shell.h ../include/ether.h \
+ ../include/vlan.h ../include/clock.h ../include/dsp.h
+xsh_xweb.o: ../shell/xsh_xweb.c ../include/stdio.h ../include/stdarg.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/ether.h ../include/device.h ../include/ethernet.h \
+ ../include/vlan.h ../include/http.h ../include/network.h \
+ ../include/string.h
+xsh_tar.o: ../shell/xsh_tar.c ../include/stddef.h ../include/stdio.h \
+ ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/stdlib.h ../include/tar.h
+xsh_flashstat.o: ../shell/xsh_flashstat.c ../include/flash.h \
+ ../include/kernel.h ../include/conf.h ../include/stddef.h \
+ ../include/device.h ../include/semaphore.h ../include/queue.h \
+ ../include/stdarg.h ../include/stdio.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/string.h
+xsh_nvram.o: ../shell/xsh_nvram.c ../include/kernel.h ../include/conf.h \
+ ../include/stddef.h ../include/nvram.h ../include/flash.h \
+ ../include/device.h ../include/semaphore.h ../include/queue.h \
+ ../include/stdarg.h ../include/stdio.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/debug.h \
+ ../include/platform.h ../system/platforms/raspberry-pi/platform-local.h \
+ ../include/memory.h ../include/string.h
+xsh_test.o: ../shell/xsh_test.c ../include/stddef.h ../include/stdlib.h
+xsh_testsuite.o: ../shell/xsh_testsuite.c ../include/stddef.h \
+ ../include/thread.h ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/stdio.h ../include/stdarg.h ../include/string.h \
+ ../include/stdlib.h ../include/testsuite.h
+xsh_printtos.o: ../shell/xsh_printtos.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/printtos.h
+xsh_printprocstks.o: ../shell/xsh_printprocstks.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/printprocstks.h
+xsh_flashtest.o: ../shell/xsh_flashtest.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h
+xsh_lights.o: ../shell/xsh_lights.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/lights.h
+xsh_display.o: ../shell/xsh_display.c ../include/stddef.h \
+ ../include/stdio.h ../include/stdarg.h ../include/thread.h \
+ ../system/platforms/raspberry-pi/interrupt.h \
+ ../system/platforms/raspberry-pi/stdint.h \
+ ../system/platforms/raspberry-pi/bcm2835.h \
+ ../system/platforms/raspberry-pi/stdint.h ../include/semaphore.h \
+ ../include/queue.h ../include/kernel.h ../include/conf.h \
+ ../include/debug.h ../include/platform.h \
+ ../system/platforms/raspberry-pi/platform-local.h ../include/memory.h \
+ ../include/string.h ../include/display.h

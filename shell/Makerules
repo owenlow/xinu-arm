@@ -40,7 +40,7 @@ C_FILES += xsh_nvram.c
 C_FILES += xsh_test.c xsh_testsuite.c
 
 # OS2 Additions
-C_FILES += xsh_printtos.c xsh_printprocstks.c xsh_flashtest.c xsh_lights.c
+C_FILES += xsh_printtos.c xsh_printprocstks.c xsh_flashtest.c xsh_lights.c xsh_display.c
 
 S_FILES =
 
