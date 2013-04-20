@@ -4,4 +4,4 @@
  */
 
 
-void display_test();
+void display_test(int);

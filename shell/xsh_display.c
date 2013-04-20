@@ -32,14 +32,14 @@ shellcmd xsh_display(int nargs, char *args[])
     }
     
     /* Check for correct number of arguments */
-    if (nargs > 1)
+    if (nargs > 2)
     {
         fprintf(stderr, "%s: too many arguments\n", args[0]);
         fprintf(stderr, "Try '%s --help' for more information\n",
                 args[0]);
         return SYSERR;
     }
-    if (nargs < 1)
+    if (nargs < 2)
     {
         fprintf(stderr, "%s: too few arguments\n", args[0]);
         fprintf(stderr, "Try '%s --help' for more information\n",
@@ -47,7 +47,7 @@ shellcmd xsh_display(int nargs, char *args[])
         return SYSERR;
     }
     
-    display_test();
+    display_test(args[1][0] - '0');
     
     return OK;
 }
