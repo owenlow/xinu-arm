@@ -1,6 +1,6 @@
 /*
- * @file     xsh_display.c
- * @provides xsh_display
+ * @file     xsh_imgviewer.c
+ * @provides xsh_imgviewer
  *
  * Author: Owen Royall-Kahin
  */
@@ -8,15 +8,15 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
-#include <display.h>
+#include <imgviewer.h>
 
 /**
- * Shell command (display).
+ * Shell command (imgviewer).
  * @param nargs  number of arguments in args array
  * @param args   array of arguments
  * @return OK for success, SYSERR for syntax error
  */
-shellcmd xsh_display(int nargs, char *args[])
+shellcmd xsh_imgviewer(int nargs, char *args[])
 {
     
     
@@ -47,7 +47,8 @@ shellcmd xsh_display(int nargs, char *args[])
         return SYSERR;
     }
     
-    display_test(args[1][0] - '0');
+    display_test();
     
     return OK;
 }
+

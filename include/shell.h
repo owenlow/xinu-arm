@@ -99,6 +99,6 @@ shellcmd xsh_printtos(int, char *[]);
 shellcmd xsh_printprocstks(int, char *[]);
 shellcmd xsh_lights(int, char *[]);
 shellcmd xsh_flashtest(int, char *[]);
-shellcmd xsh_display(int, char *[]);
+shellcmd xsh_imgviewer(int, char *[]);
 
 #endif                          /* _SHELL_H_ */

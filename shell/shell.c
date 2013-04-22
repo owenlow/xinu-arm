@@ -97,7 +97,7 @@ const struct centry commandtab[] = {
     {"printprocstks", FALSE, xsh_printprocstks},
     {"lights", FALSE, xsh_lights},
     {"flashtest", FALSE, xsh_flashtest},
-    {"display", FALSE, xsh_display}
+    {"imgviewer", FALSE, xsh_imgviewer}
 };
 
 const ulong ncommand = sizeof(commandtab) / sizeof(struct centry);
