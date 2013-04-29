@@ -47,7 +47,7 @@ shellcmd xsh_imgviewer(int nargs, char *args[])
         return SYSERR;
     }
     
-    display_test();
+    display_test(args[1][0]-'0');
     
     return OK;
 }

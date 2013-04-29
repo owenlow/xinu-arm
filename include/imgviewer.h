@@ -1,3 +1,9 @@
+/**
+ * imgviewer.h
+ * Author: Owen Royall-Kahin
+ */
 
 
-void test_display();
+void display_image(char *);
+
+void test_display(int );
