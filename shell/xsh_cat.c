@@ -1,36 +1,36 @@
-/*
- * @file     xsh_imgviewer.c
- * @provides xsh_imgviewer
- *
+/**
+ * File: xsh_cat.c
+ * Description: File cat command for tempfs
  * Author: Owen Royall-Kahin
  */
 
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
-#include <imgviewer.h>
+
+#include <tempfs.h>
 
 /**
- * Shell command (imgviewer).
+ * Shell command (cat).
  * @param nargs  number of arguments in args array
  * @param args   array of arguments
  * @return OK for success, SYSERR for syntax error
  */
-shellcmd xsh_imgviewer(int nargs, char *args[])
+shellcmd xsh_cat(int nargs, char *args[])
 {
-    
-    
+
+
     /* Output help, if '--help' argument was supplied */
     if (nargs == 2 && strncmp(args[1], "--help", 7) == 0)
     {
         printf("Usage: %s\n\n", args[0]);
         printf("Description:\n");
-        printf("\tDisplay data through HDMI out.\n");
+        printf("\tDisplays contents of tempfs file.\n");
         printf("Options:\n");
         printf("\t--help\tdisplay this help and exit\n");
         return OK;
     }
-    
+
     /* Check for correct number of arguments */
     if (nargs > 2)
     {
@@ -47,14 +47,7 @@ shellcmd xsh_imgviewer(int nargs, char *args[])
         return SYSERR;
     }
     
-    if (strnlen(args[1], 1000) == 1) {
-        display_test(args[1][0]-'0');
-    }
-    else {
-        display_image(args[1]);
-    }
-    
-    
+    cat(args[1]);
+
     return OK;
 }
-

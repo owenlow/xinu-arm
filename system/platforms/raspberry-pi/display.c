@@ -53,15 +53,25 @@ void setPixel(int x, int y, pixel_t pix) {
     ((uint16_t*)fb->fb_ptr)[x + ((fb->width) * y)] = getColor(pix);
 }
 
-
 void setPixel2(int x, int y, uint8_t r, uint8_t g, uint8_t b ) {
     ((uint16_t*)fb->fb_ptr)[x + ((fb->width) * y)] = getColor2(r, g, b);
 }
 
+void setPixel3( int x, int y, uint16_t color ) {
+    ((uint16_t*)fb->fb_ptr)[x + ((fb->width) * y)] = color;
+}
+
+static int initialized = 0;
+
 void display_init() {
-    fb = fb_init();
-    if (!fb) {
-        printf("Error creating fb\n");
+    if (initialized != 1) {
+        fb = fb_init();
+        if (!fb) {
+            printf("Error creating fb\n");
+        }
+        else {
+            initialized = 1;
+        }
     }
 }
 

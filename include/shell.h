@@ -101,4 +101,13 @@ shellcmd xsh_lights(int, char *[]);
 shellcmd xsh_flashtest(int, char *[]);
 shellcmd xsh_imgviewer(int, char *[]);
 
+// tempfs related
+shellcmd xsh_mount(int, char *[]);
+shellcmd xsh_ls(int, char *[]);
+shellcmd xsh_touch(int, char *[]);
+shellcmd xsh_rm(int, char *[]);
+shellcmd xsh_cat(int, char *[]);
+shellcmd xsh_fileappend(int, char *[]);
+shellcmd xsh_df(int, char *[]);
+
 #endif                          /* _SHELL_H_ */

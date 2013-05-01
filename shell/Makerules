@@ -42,6 +42,9 @@ C_FILES += xsh_test.c xsh_testsuite.c
 # OS2 Additions
 C_FILES += xsh_printtos.c xsh_printprocstks.c xsh_flashtest.c xsh_lights.c xsh_imgviewer.c
 
+# tempfs Additions
+C_FILES += xsh_mount.c xsh_ls.c xsh_touch.c xsh_rm.c xsh_cat.c xsh_fileappend.c xsh_df.c
+
 S_FILES =
 
 # Add the files to the compile source path

@@ -17,6 +17,7 @@
 #include <thread.h>
 #include <nvram.h>
 #include <conf.h>
+#include <tempfs.h>
 
 const struct centry commandtab[] = {
 #if NETHER
@@ -98,6 +99,16 @@ const struct centry commandtab[] = {
     {"lights", FALSE, xsh_lights},
     {"flashtest", FALSE, xsh_flashtest},
     {"imgviewer", FALSE, xsh_imgviewer}
+    
+    ,
+    // tempfs Commands
+    {"mount", FALSE, xsh_mount},
+    {"ls", FALSE, xsh_ls},
+    {"touch", FALSE, xsh_touch},
+    {"rm", FALSE, xsh_rm},
+    {"cat", FALSE, xsh_cat},
+    {"fileappend", FALSE, xsh_fileappend},
+    {"df", FALSE, xsh_df}
 };
 
 const ulong ncommand = sizeof(commandtab) / sizeof(struct centry);
@@ -128,7 +139,9 @@ thread shell(int indescrp, int outdescrp, int errdescrp)
     device *devptr;             /* device pointer           */
 
     printf( "Welcome to the shell!\r\n" );
-
+    
+    
+    
     /* Enable interrupts */
     enable();
 
@@ -170,7 +183,10 @@ thread shell(int indescrp, int outdescrp, int errdescrp)
     printf(SHELL_BANNER);
     /* Print shell welcome message */
     printf(SHELL_START);
-
+    
+    // Init file system
+    //_fs_init();
+    
     /* Continually receive and handle commands */
     while (TRUE)
     {
