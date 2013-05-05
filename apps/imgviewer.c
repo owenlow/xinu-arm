@@ -88,39 +88,59 @@ void display_img( uint8_t *data ) {
     int x, y;
     int32_t height = read32(data, IMG_HEIGHT);
     int32_t width = read32(data, IMG_WIDTH);
-    
-    // flip sign bit in height
-    if (height < 0) {
-        height ^= 0xFFFFFFFF;
-        height += 1;
-    }
-    
     uint32_t offset = read32(data, IMG_OFFSET);
     uint32_t filesize = read32(data, IMG_SIZE);
-    printf("displaying img of x: %d, y: %d", width, height);
+    
+    printf("displaying img of x: %d, y: %d, offset: %d\n", width, height, offset);
     
     // Set background to white
     clear_buffer2( 0, 0, 0 );
     
     
-    // For each row
-    for (y = 0; y < height; ++y) {
-        // For each column in this row
-        for (x = 0; x < width; ++x) {
-            // Offset for this pixel (x, y) in the image
-            uint32_t cur = offset + (2*(x+(width*y)));
-            
-            // [ 0xff, 0xff ]
-            setPixel3( x, y, ((uint16_t*)data)[cur]);
-            /*
-            // This pixel should be located at:
-            uint32_t cur = offset + (4*(x+(width*y)));
-            //printf("%d\n", cur);
-            // Set it
-            // [ 0xBL, 0xGR, 0xRD, 0xAL ]
-            setPixel2(x, y, data[cur+2], data[cur+1], data[cur]);
-             */
+    if (height < 0) {
+        // Image is right-side up
+        
+        height ^= 0xFFFFFFFF;
+        height += 1;
+        // For each row
+        for (y = 0; y < height; ++y) {
+            // For each column in this row
+            for (x = 0; x < width; ++x) {
+                // Offset for this pixel (x, y) in the image
+                uint32_t cur = offset + (1*(x+(width*y)));
+                if ( x == 0 && y == 0 ) {
+                    printf("cur = %d, x = %d, y = %d\n", cur, x, y);
+                }
+                // [ 0xff, 0xff ]
+                setPixel3( x, y, ((uint16_t*)data)[cur]);
+            }
+        }
+        
+    } else {
+        // Image is upside down
+        
+        // For each row
+        for (y = 0; y < height; ++y) {
+            // For each column in this row
+            for (x = 0; x < width; ++x) {
+                // Offset for this pixel (x, y) in the image
+                uint32_t cur = offset + (1*(x+(width*y)));
+                if ( x == 0 && y == 0 ) {
+                    printf("cur = %d, x = %d, y = %d\n", cur, x, y);
+                }
+                
+                // [ 0xff, 0xff ]
+                setPixel3( x, height-y, ((uint16_t*)data)[cur]);
+            }
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

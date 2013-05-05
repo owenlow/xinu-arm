@@ -10,7 +10,7 @@
 
 /***** Private Definitions *****/
 
-
+#define BIGNUM 65535
 
 // Cluster size in bytes (should be multiple of 1024)
 #define CL_SIZE 8192
@@ -37,8 +37,8 @@ uint32_t *fat;
 uint8_t *fs;
 
 /****** Navigating the Filesystem *****/
-int read_data( int, char**, size_t );
-void write_data( int, char *, size_t );
+int read_data( uint16_t, char**, size_t );
+void write_data( uint16_t, char *, size_t );
 int tempread( void*, size_t, size_t );
 int tempwrite( const void*, size_t, size_t );
 void tempseek( uint32_t );
@@ -48,10 +48,11 @@ int get_free_dt();
 void clear_fat_chain( int );
 
 /***** Begin Init *****/
-
+int print_on_write;
 int _fs_init() {
     int i;
     fs_index = 0;
+    print_on_write = 0;
     
     if (!fs) {
         // data is the 'disk'
@@ -97,7 +98,6 @@ int _fs_init() {
         tempseek( boot_record[3]*CL_SIZE );
         tempwrite( fat, CL_SIZE, 1 );
         
-        printFAT();
         
     }
     return 0;
@@ -108,7 +108,7 @@ int _fs_init() {
 int tempread( void* buffer, size_t size, size_t n ) {
     int i;
     
-    for (i = 0; i < (n*size); ++i) {
+    for (i = 0; i < (size*n); ++i) {
         ((uint8_t*)buffer)[i] = fs[fs_index+i];
     }
     
@@ -179,7 +179,7 @@ void clear_fat_chain( int start_index ) {
     fat[current_cluster] = 0x0000;
 }
 
-int read_data( int cluster_index, char** buffer, size_t size ) {
+int read_data( uint16_t cluster_index, char** buffer, size_t size ) {
     int dsize = CL_SIZE;
     uint8_t *data = memget(dsize);
     uint8_t *currentPos = data;
@@ -187,36 +187,41 @@ int read_data( int cluster_index, char** buffer, size_t size ) {
     
     uint32_t data_left = size;
     
-    while (cluster_index != 0xFFFF) {
+    printf("read cluster index: %d\n", cluster_index);
+    printf("next cluster index: %d\n", fat[cluster_index]);
+    while (cluster_index != 65535) {
+        printf("read loop entered");
         tempseek( cluster_index*CL_SIZE );
-        if ( i > 0 ) {
-            int newsize = CL_SIZE*(i+1);
-            uint8_t temp = memget( newsize );
-            memcpy( temp, data, dsize );
-            
-            memfree( data, dsize );
-            dsize = newsize;
-            data = temp;
-        }
-        ++i;
+//        if ( i > 0 ) {
+//            int newsize = CL_SIZE*(i+1);
+//            uint8_t temp = memget( newsize );
+//            memcpy( temp, data, dsize );
+//            
+//            memfree( data, dsize );
+//            dsize = newsize;
+//            data = temp;
+//        }
+//        ++i;
         
         tempread( currentPos, CL_SIZE, 1 );
         cluster_index = fat[cluster_index];
     }
     
-    *buffer = data;
+    memcpy(*buffer, data, size);
+    
+    memfree(data, dsize);
+    
     return CL_SIZE*i;
 }
 
-void write_data( int first_cluster, char *data, size_t size ) {
+void write_data( uint16_t first_cluster, char *data, size_t size ) {
     uint8_t *currentPos = data;
     size_t writeSize = size;
     size_t leftToWrite = size;
     
-    if (CL_SIZE < size) {
-        writeSize = CL_SIZE;
-    }
-    
+//    if (CL_SIZE < size) {
+//        writeSize = CL_SIZE;
+//    }
     tempseek( first_cluster*CL_SIZE );
     tempwrite( currentPos, 1, writeSize );
     
@@ -225,25 +230,26 @@ void write_data( int first_cluster, char *data, size_t size ) {
     int thisCluster = first_cluster;
     int nextCluster = 0;
     
-    while ( leftToWrite > 0 ) {
-        currentPos += writeSize;
-        
-        if (writeSize > leftToWrite) {
-            writeSize = leftToWrite;
-        }
-        
-        nextCluster = get_free_fat();
-        fat[thisCluster] = nextCluster;
-        
-        tempseek( nextCluster*CL_SIZE );
-        tempwrite( currentPos, 1, writeSize );
-        
-        thisCluster = nextCluster;
-        leftToWrite -= writeSize;
-        
-    }
+//    while ( leftToWrite > 0 ) {
+//        currentPos += writeSize;
+//        
+//        if (writeSize > leftToWrite) {
+//            writeSize = leftToWrite;
+//        }
+//        
+//        nextCluster = get_free_fat();
+//        fat[thisCluster] = nextCluster;
+//        
+//        tempseek( nextCluster*CL_SIZE );
+//        tempwrite( currentPos, 1, writeSize );
+//        
+//        thisCluster = nextCluster;
+//        leftToWrite -= writeSize;
+//        
+//    }
     
     fat[thisCluster] = 0xFFFF;
+    
     
 }
 
@@ -266,20 +272,25 @@ void closeFile( fs_file_t file ) {
 }
 
 void touch( char* filename ) {
+    
     if (get_dt_index(filename) == -1) {
         int dti = get_free_dt();
         int fi = get_free_fat();
         
-        int len = strnlen(filename, 50);
+        int len = strnlen(filename, 112);
         strncpy(dir_table[dti].name, filename, len);
         dir_table[dti].name[len] = 0;
         dir_table[dti].index = fi;
         dir_table[dti].time = 0;
         dir_table[dti].size = 0;
         dir_table[dti].type = 0;
-        
+        printf("new file at fat index: %d\n", fi);
         fat[fi] = 0xFFFF;
     }
+    
+    write_dt();
+    write_fat();
+    
 }
 
 void rm( char* filename ) {
@@ -308,9 +319,10 @@ void cat( char* filename ) {
         int current_cluster = dir_table[dti].index;
         int size = dir_table[dti].size;
         printf("size of file: %d\n", size);
-        char *data = memget(size);
+        char *data = memget(size+1);
         read_data( current_cluster, &data, size );
-        //printf("%s\n", data);
+        data[size] = 0;
+        printf("%s\n", data);
         
         memfree( data, size );
     }
@@ -319,16 +331,20 @@ void cat( char* filename ) {
 void fileappend( char* filename, char** content, int nargs ) {
     int i;
     int dti = get_dt_index( filename );
-    
+    print_on_write = 1;
     if (dti != -1) {
         
         for (i = 0; i < nargs; ++i) {
             printf("appending: %s\n", content[i]);
-            int size = strnlen( content[i], 50 );
+            int size = strnlen( content[i], BIGNUM );
             write_data( dir_table[dti].index, content[i], size );
-            dir_table[dti].size += size+1;
+            
+            dir_table[dti].size += size;
         }
     }
+    print_on_write = 0;
+    write_dt();
+    write_fat();
 }
 
 void df() {
@@ -338,7 +354,7 @@ void df() {
     int used_clusters = 0;
     int i;
     for (i = 0; i < CL_COUNT; ++i) {
-        if (fat[i] != 0x00) {
+        if (fat[i] != 0x0000) {
             ++used_clusters;
         }
     }
@@ -352,7 +368,13 @@ void df() {
 }
 
 void write_dt() {
-    //tempseek( CL_SIZE*boot_record[2] );
+    tempseek( CL_SIZE*boot_record[2] );
+    tempwrite( dir_table, CL_SIZE, 1 );
+}
+
+void write_fat() {
+    tempseek( CL_SIZE*boot_record[3] );
+    tempwrite( fat, CL_SIZE, 1 );
 }
 
 void printDT() {
