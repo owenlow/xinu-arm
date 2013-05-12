@@ -4,6 +4,8 @@
  * Author: Owen Royall-Kahin
  */
 
+#ifndef _TEMPFS_H_
+#define _TEMPFS_H_
 
 #include <stdint.h>
 
@@ -22,13 +24,23 @@ int _fs_init();
  * block of data. Be sure to close this block when done.
  */
 
-fs_file_t openFile( char * );
+fs_file_t * openFile( char * );
 
 /**
- * Close the target file, otherwise it will linger in memory.
+ * Create a new file. Same as touch, but meant to be used from
+ * an application. Returns fs_file_t of new file. Note that
+ * data block is unitialized after calling this function, you must
+ * allocate the data in the owning application.
  */
 
-void closeFile( fs_file_t );
+fs_file_t * newFile( char * );
+
+/**
+ * Close the target file and save changes, otherwise it will 
+ * linger in memory.
+ */
+
+void closeFile( fs_file_t * );
 
 /***** Filesystem functions *****/
 
@@ -58,10 +70,10 @@ void ls();
 void cat(char*);
 
 /**
- * fileappend: append content to an existing file, for testing
+ * fileappend: append string to an existing file, for testing
  */
 
-void fileappend(char*, char**, int);
+void fileappend(char*, char*, int);
 
 /**
  * df: get filesystem statistics
@@ -69,3 +81,10 @@ void fileappend(char*, char**, int);
 
 void df();
 
+/**
+ * stat: get file information
+ */
+
+void stat();
+
+#endif

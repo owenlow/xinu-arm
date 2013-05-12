@@ -1,4 +1,8 @@
-/* Embedded Xinu, Copyright (C) 2008.  All rights reserved. */
+/**
+ * lights.c
+ * Code for testing the light functionality
+ * Author: Owen Royall-Kahin
+ */
 
 #include <lights.h>
 

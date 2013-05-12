@@ -98,7 +98,8 @@ const struct centry commandtab[] = {
     {"printprocstks", FALSE, xsh_printprocstks},
     {"lights", FALSE, xsh_lights},
     {"flashtest", FALSE, xsh_flashtest},
-    {"imgviewer", FALSE, xsh_imgviewer}
+    {"imgviewer", FALSE, xsh_imgviewer},
+    {"player", FALSE, xsh_player}
     
     ,
     // tempfs Commands
@@ -185,7 +186,7 @@ thread shell(int indescrp, int outdescrp, int errdescrp)
     printf(SHELL_START);
     
     // Init file system
-    //_fs_init();
+    _fs_init();
     
     /* Continually receive and handle commands */
     while (TRUE)

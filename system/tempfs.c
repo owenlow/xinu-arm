@@ -10,16 +10,11 @@
 
 /***** Private Definitions *****/
 
-#define BIGNUM 65535
+#define BIGNUM      65535
+#define CL_SIZE     2048
+#define CL_COUNT    1000
+#define FS_SIZE     ( CL_SIZE * CL_COUNT )
 
-// Cluster size in bytes (should be multiple of 1024)
-#define CL_SIZE 8192
-#define CL_COUNT 6000
-
-// FS size in bytes
-#define FS_SIZE ( CL_SIZE * CL_COUNT )
-
-// DT entry size is 128 bytes
 typedef struct dt_entry {
     char name[112];
     uint32_t index; // index of the first cluster for the file
@@ -33,7 +28,8 @@ static int tempfs_initialized;
 uint32_t fs_index;
 uint32_t *boot_record;
 dt_entry_t *dir_table;
-uint32_t *fat;
+int dir_table_size;
+uint16_t *fat;
 uint8_t *fs;
 
 /****** Navigating the Filesystem *****/
@@ -48,11 +44,9 @@ int get_free_dt();
 void clear_fat_chain( int );
 
 /***** Begin Init *****/
-int print_on_write;
 int _fs_init() {
     int i;
     fs_index = 0;
-    print_on_write = 0;
     
     if (!fs) {
         // data is the 'disk'
@@ -72,18 +66,18 @@ int _fs_init() {
         printf("fs initialized\nsize: %d\ncluster size:%d\ncluster count:%d\n",
                FS_SIZE, CL_SIZE, CL_COUNT);
         
-        int dt_size = CL_SIZE/128;
-        dir_table = memget(sizeof(dt_entry_t)*dt_size);
-        for (i = 0; i < dt_size; ++i) {
+        dir_table_size = CL_SIZE/sizeof(dt_entry_t);
+        dir_table = memget( CL_SIZE );
+        for (i = 0; i < dir_table_size; ++i) {
             dir_table[i].name[0] = 0;
         }
         
-        fat = memget(CL_COUNT);
+        fat = memget(CL_COUNT*sizeof(uint16_t));
         // Clear FAT
-        memset(fat, 0x0000, CL_COUNT*sizeof(uint32_t));
+        memset(fat, 0x0000, CL_COUNT*sizeof(uint16_t));
         
         // First 3 clusters occupied (BR, DT, FAT)
-        memset(fat, 0xFFFF, 3*sizeof(uint32_t));
+        memset(fat, 0xFFFF, 3*sizeof(uint16_t));
         
         
         // Write BR
@@ -103,8 +97,6 @@ int _fs_init() {
     return 0;
 }
 
-
-
 int tempread( void* buffer, size_t size, size_t n ) {
     int i;
     
@@ -113,7 +105,7 @@ int tempread( void* buffer, size_t size, size_t n ) {
     }
     
     fs_index += i;
-    return 0;
+    return fs_index;
 }
 
 int tempwrite( const void* buffer, size_t size, size_t n ) {
@@ -124,7 +116,7 @@ int tempwrite( const void* buffer, size_t size, size_t n ) {
     }
     
     fs_index += i;
-    return 0;
+    return fs_index;
 }
 
 void tempseek( uint32_t offset ) {
@@ -134,7 +126,7 @@ void tempseek( uint32_t offset ) {
 int get_dt_index( char * filename ) {
     int i;
     
-    for (i = 0; i != CL_SIZE/sizeof(dt_entry_t); ++i) {
+    for (i = 0; i < dir_table_size; ++i) {
         if (strncmp(dir_table[i].name, filename, 112) == 0) {
             return i;
         }
@@ -158,7 +150,7 @@ int get_free_fat() {
 int get_free_dt() {
     int i;
     
-    for (i = 0; i < CL_SIZE/sizeof(dt_entry_t); ++i) {
+    for (i = 0; i < dir_table_size; ++i) {
         if (dir_table[i].name[0] == 0 || dir_table[i].name[0] == 0xFF) {
             return i;
         }
@@ -187,21 +179,21 @@ int read_data( uint16_t cluster_index, char** buffer, size_t size ) {
     
     uint32_t data_left = size;
     
-    printf("read cluster index: %d\n", cluster_index);
-    printf("next cluster index: %d\n", fat[cluster_index]);
-    while (cluster_index != 65535) {
-        printf("read loop entered");
+//    printf("read cluster index: %d\n", cluster_index);
+//    printf("next cluster index: %d\n", fat[cluster_index]);
+    while (cluster_index != 0xffff) {
+//        printf("read loop entered");
         tempseek( cluster_index*CL_SIZE );
-//        if ( i > 0 ) {
-//            int newsize = CL_SIZE*(i+1);
-//            uint8_t temp = memget( newsize );
-//            memcpy( temp, data, dsize );
-//            
-//            memfree( data, dsize );
-//            dsize = newsize;
-//            data = temp;
-//        }
-//        ++i;
+        if ( i > 0 ) {
+            int newsize = CL_SIZE*(i+1);
+            uint8_t temp = memget( newsize );
+            memcpy( temp, data, dsize );
+            
+            memfree( data, dsize );
+            dsize = newsize;
+            data = temp;
+        }
+        ++i;
         
         tempread( currentPos, CL_SIZE, 1 );
         cluster_index = fat[cluster_index];
@@ -219,9 +211,10 @@ void write_data( uint16_t first_cluster, char *data, size_t size ) {
     size_t writeSize = size;
     size_t leftToWrite = size;
     
-//    if (CL_SIZE < size) {
-//        writeSize = CL_SIZE;
-//    }
+    if (CL_SIZE < size) {
+        writeSize = CL_SIZE;
+    }
+    
     tempseek( first_cluster*CL_SIZE );
     tempwrite( currentPos, 1, writeSize );
     
@@ -230,45 +223,66 @@ void write_data( uint16_t first_cluster, char *data, size_t size ) {
     int thisCluster = first_cluster;
     int nextCluster = 0;
     
-//    while ( leftToWrite > 0 ) {
-//        currentPos += writeSize;
-//        
-//        if (writeSize > leftToWrite) {
-//            writeSize = leftToWrite;
-//        }
-//        
-//        nextCluster = get_free_fat();
-//        fat[thisCluster] = nextCluster;
-//        
-//        tempseek( nextCluster*CL_SIZE );
-//        tempwrite( currentPos, 1, writeSize );
-//        
-//        thisCluster = nextCluster;
-//        leftToWrite -= writeSize;
-//        
-//    }
+    while ( leftToWrite > 0 ) {
+        currentPos += writeSize;
+        
+        if (writeSize > leftToWrite) {
+            writeSize = leftToWrite;
+        }
+        
+        nextCluster = get_free_fat();
+        fat[thisCluster] = nextCluster;
+        
+        tempseek( nextCluster*CL_SIZE );
+        tempwrite( currentPos, 1, writeSize );
+        
+        thisCluster = nextCluster;
+        leftToWrite -= writeSize;
+        
+    }
     
     fat[thisCluster] = 0xFFFF;
     
     
 }
 
-
-
-
-fs_file_t openFile( char * filename ) {
-    fs_file_t result;
+fs_file_t * openFile( char * filename ) {
+    fs_file_t * result = memget( sizeof(fs_file_t) );
     
     dt_entry_t dt = dir_table[ get_dt_index( filename ) ];
-    result.size = dt.size;
-    result.data = memget(result.size);
-    read_data( dt.index, &result.data, result.size );
+    result->size = dt.size;
+    result->data = memget(result->size);
+    read_data( dt.index, &(result->data), result->size );
     
     return result;
 }
 
-void closeFile( fs_file_t file ) {
-    memfree( file.data, file.size );
+fs_file_t * newFile( char * filename ) {
+    fs_file_t * result;
+    if (get_dt_index(filename) == -1) {
+        result = memget( sizeof(fs_file_t) );
+        int dti = get_free_dt();
+        int fi = get_free_fat();
+        
+        int len = strnlen(filename, 112);
+        strncpy(dir_table[dti].name, filename, len);
+        dir_table[dti].name[len] = 0;
+        dir_table[dti].index = fi;
+        dir_table[dti].time = 0;
+        dir_table[dti].size = 0;
+        dir_table[dti].type = 0;
+        fat[fi] = 0xFFFF;
+    } else {
+        result = openFile( filename );
+    }
+    
+    return result;
+}
+
+void closeFile( fs_file_t * file ) {
+    memfree( file->data, file->size );
+    memfree( file, sizeof(fs_file_t) );
+    
 }
 
 void touch( char* filename ) {
@@ -284,7 +298,6 @@ void touch( char* filename ) {
         dir_table[dti].time = 0;
         dir_table[dti].size = 0;
         dir_table[dti].type = 0;
-        printf("new file at fat index: %d\n", fi);
         fat[fi] = 0xFFFF;
     }
     
@@ -305,7 +318,7 @@ void rm( char* filename ) {
 void ls() {
     int i;
     
-    for (i = 0; i < CL_SIZE/sizeof(dt_entry_t); ++i) {
+    for (i = 0; i < dir_table_size; ++i) {
         if (dir_table[i].name[0] != 0 && dir_table[i].name[0] != 0xFF) {
             printf("%s\n", dir_table[i].name);
         }
@@ -318,7 +331,6 @@ void cat( char* filename ) {
     if (dti != -1) {
         int current_cluster = dir_table[dti].index;
         int size = dir_table[dti].size;
-        printf("size of file: %d\n", size);
         char *data = memget(size+1);
         read_data( current_cluster, &data, size );
         data[size] = 0;
@@ -328,21 +340,20 @@ void cat( char* filename ) {
     }
 }
 
-void fileappend( char* filename, char** content, int nargs ) {
+void fileappend( char* filename, char* content, int nargs ) {
     int i;
     int dti = get_dt_index( filename );
-    print_on_write = 1;
     if (dti != -1) {
+        dt_entry_t *cur = &dir_table[dti];
         
-        for (i = 0; i < nargs; ++i) {
-            printf("appending: %s\n", content[i]);
-            int size = strnlen( content[i], BIGNUM );
-            write_data( dir_table[dti].index, content[i], size );
-            
-            dir_table[dti].size += size;
-        }
+        int size = strnlen( content, BIGNUM );
+        uint8_t *buffer = memget( cur->size + size );
+        read_data( cur->index, &buffer, cur->size );
+        memcpy( buffer+(cur->size), content, size );
+        write_data( cur->index, buffer, cur->size + size );
+        
+        cur->size += size;
     }
-    print_on_write = 0;
     write_dt();
     write_fat();
 }
@@ -360,11 +371,15 @@ void df() {
     }
     printf("Used Clusters: %d\n", used_clusters);
     printf("Available Clusters: %d\n", CL_COUNT-used_clusters);
-    double percent = (CL_COUNT-used_clusters)*(100/CL_COUNT);
-    printf("Percentage Free: %d\n", percent);
+    float percent = ((float)CL_COUNT-(float)used_clusters)*((float)100/(float)CL_COUNT);
+    printf("Percentage Free: %f\n", percent);
     
     //printFAT();
     //printDT();
+}
+
+void stat( char * filename ) {
+    
 }
 
 void write_dt() {
@@ -381,7 +396,7 @@ void printDT() {
     int i;
     
     printf("Directory Table:\n");
-    for (i = 0; i < CL_SIZE/128; ++i) {
+    for (i = 0; i < dir_table_size; ++i) {
         if (dir_table[i].name[0] != 0x00 &&
             dir_table[i].name[0] != 0xff) {
             printf("Entry #%d\n", i);

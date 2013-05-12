@@ -6,8 +6,9 @@
 #include <stdio.h>
 #include <memory.h>
 #include <tempfs.h>
-#include "../system/platforms/raspberry-pi/display.h"
+#include "../system/platforms/raspberry-pi/draw.h"
 
+#if 1
 
 // Offsets (all 4 bytes)
 #define IMG_SIZE    0x2
@@ -29,15 +30,15 @@ uint8_t img3[] = {
 
 void display_image(char *filename) {
     // Using tempfs.h, open file 'block'
-    display_init();
+    _display_init();
     
-    fs_file_t file = openFile(filename);
-    display_img( file.data );
+    fs_file_t * file = openFile(filename);
+    display_img( file->data );
     closeFile(file);
 }
 
 void display_test(int test) {
-    display_init();
+    _display_init();
     
     switch (test) {
         case 0:
@@ -74,7 +75,7 @@ uint32_t read32( uint8_t *buff, int offset ) {
 
 void test0() {
     
-    clear_buffer();
+    clearBuffer();
     int x,y;
     
     for (x = 100; x != 500; ++x) {
@@ -94,7 +95,7 @@ void display_img( uint8_t *data ) {
     printf("displaying img of x: %d, y: %d, offset: %d\n", width, height, offset);
     
     // Set background to white
-    clear_buffer2( 0, 0, 0 );
+    clearBuffer3( WHITE );
     
     
     if (height < 0) {
@@ -108,9 +109,7 @@ void display_img( uint8_t *data ) {
             for (x = 0; x < width; ++x) {
                 // Offset for this pixel (x, y) in the image
                 uint32_t cur = offset + (1*(x+(width*y)));
-                if ( x == 0 && y == 0 ) {
-                    printf("cur = %d, x = %d, y = %d\n", cur, x, y);
-                }
+                
                 // [ 0xff, 0xff ]
                 setPixel3( x, y, ((uint16_t*)data)[cur]);
             }
@@ -135,12 +134,6 @@ void display_img( uint8_t *data ) {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
 }
+
+#endif

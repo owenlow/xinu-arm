@@ -100,6 +100,7 @@ shellcmd xsh_printprocstks(int, char *[]);
 shellcmd xsh_lights(int, char *[]);
 shellcmd xsh_flashtest(int, char *[]);
 shellcmd xsh_imgviewer(int, char *[]);
+shellcmd xsh_player(int, char *[]);
 
 // tempfs related
 shellcmd xsh_mount(int, char *[]);
