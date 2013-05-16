@@ -43,7 +43,7 @@ C_FILES += xsh_test.c xsh_testsuite.c
 C_FILES += xsh_printtos.c xsh_printprocstks.c xsh_flashtest.c xsh_lights.c xsh_imgviewer.c xsh_player.c
 
 # tempfs Additions
-C_FILES += xsh_mount.c xsh_ls.c xsh_touch.c xsh_rm.c xsh_cat.c xsh_fileappend.c xsh_df.c
+C_FILES += xsh_mount.c xsh_ls.c xsh_touch.c xsh_rm.c xsh_cat.c xsh_fileappend.c xsh_df.c xsh_stat.c
 
 S_FILES =
 

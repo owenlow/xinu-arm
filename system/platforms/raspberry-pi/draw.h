@@ -8,8 +8,14 @@
 
 #include <stdio.h>
 
-#define BLACK   0x00
-#define WHITE   0xFF
+#define BLACK   0x0000
+#define WHITE   0xFFFF
+#define RED     0xF800
+#define GREEN   0x07E0
+#define BLUE    0x001F
+#define CYAN    0x07FF
+#define PINK    0xF81F
+#define YELLOW  0xFFE0
 
 /**
  * Initializes the display module. Must be done before anything else,

@@ -18,29 +18,14 @@ uint16_t getColor( uint8_t r, uint8_t g, uint8_t b ) {
 struct fb_info *fb;
 
 void clearBuffer() {
-    int i;
-    uint16_t *addr = fb->fb_ptr;
-    
-    for (i = 0; i < (fb->height)*(fb->width); ++i) {
-        if (addr[i] != BLACK) {
-            addr[i] = BLACK;
-        }
-    }
+    clearBuffer3( BLACK );
 }
 
-void clearBuffer2(uint8_t r, uint8_t g, uint8_t b) {
-    int i;
-    uint16_t *addr = fb->fb_ptr;
-    uint16_t color = getColor(r, g, b);
-    
-    for (i = 0; i < (fb->height)*(fb->width); ++i) {
-        if (addr[i] != color) {
-            addr[i] = color;
-        }
-    }
+void clearBuffer2( uint8_t r, uint8_t g, uint8_t b ) {
+    clearBuffer3( getColor(r, g, b) );
 }
 
-void clearBuffer3( uint16_t color) {
+void clearBuffer3( uint16_t color ) {
     int i;
     uint16_t *addr = fb->fb_ptr;
     

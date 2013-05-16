@@ -110,5 +110,6 @@ shellcmd xsh_rm(int, char *[]);
 shellcmd xsh_cat(int, char *[]);
 shellcmd xsh_fileappend(int, char *[]);
 shellcmd xsh_df(int, char *[]);
+shellcmd xsh_stat(int, char*[]);
 
 #endif                          /* _SHELL_H_ */

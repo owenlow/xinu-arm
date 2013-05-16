@@ -13,10 +13,11 @@ typedef uint32_t size_t;
 
 typedef struct fs_file {
     uint8_t *data;
+    uint32_t dt_index;
     size_t size;
 } fs_file_t;
 
-int _fs_init();
+int _fs_init( void );
 
 /**
  * Get data with associated file name.
@@ -61,30 +62,30 @@ void rm( char* );
  * ls: Print the contents of the current working directory
  */
 
-void ls();
+void ls( void );
 
 /**
  * cat: display the contents of the file
  */
 
-void cat(char*);
+void cat( char* );
 
 /**
  * fileappend: append string to an existing file, for testing
  */
 
-void fileappend(char*, char*, int);
+void fileappend( char*, char* );
 
 /**
  * df: get filesystem statistics
  */
 
-void df();
+void df( void );
 
 /**
  * stat: get file information
  */
 
-void stat();
+void stat( char * filename );
 
 #endif

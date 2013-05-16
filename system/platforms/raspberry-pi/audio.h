@@ -10,7 +10,7 @@
 /**
  * Initialize the audio device
  */
-void _audio_init();
+void _audio_init( void );
 
 // Other functions go here
 

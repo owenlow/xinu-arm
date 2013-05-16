@@ -21,5 +21,7 @@ void audio_test( int num ) {
 }
 
 void audio_play( char * filename ) {
+    _audio_init();
+    
     // open, then play a file
 }

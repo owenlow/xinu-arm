@@ -109,7 +109,8 @@ const struct centry commandtab[] = {
     {"rm", FALSE, xsh_rm},
     {"cat", FALSE, xsh_cat},
     {"fileappend", FALSE, xsh_fileappend},
-    {"df", FALSE, xsh_df}
+    {"df", FALSE, xsh_df},
+    {"stat", FALSE, xsh_stat}
 };
 
 const ulong ncommand = sizeof(commandtab) / sizeof(struct centry);
